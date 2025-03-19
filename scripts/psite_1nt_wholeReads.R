@@ -36,7 +36,7 @@ best_psite		=	initial_psite_set[which.max(out)];
 }
 
 mx	=	read.table(inputF1,sep="\t",head=F);
-SUMall	=	sum(as.vector(mx[,-1]))
+SUMall	=	sum(unlist(mx[,-1]))
 out2	=	matrix(0,nrow=nrow(mx),ncol=(ncol(mx)+2));
 for(i in 1:nrow(mx)){
 X	=	as.vector(as.matrix(mx[i,-1]));
