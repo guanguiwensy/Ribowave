@@ -59,8 +59,8 @@ ls $outDir/$file.bed12.* | sed "s/.*$file\.bed12\.//" >> $outDir/foo
 sort $outDir/foo|uniq -c|awk '$1==2{print $2}'				>	$outDir/chrstr;
 
 for i in `cat $outDir/chrstr`;do 
-chr=`echo $i|awk -F '.' '{print $(NF-1)}'`;
-str=`echo $i|awk -F '.' '{print $NF}'`; 
+str=$(echo "$i" | sed 's/.*\.//')
+chr=$(echo "$i" | sed 's/\.[^.]*$//')
 chrLen=`awk -v chr="$chr" '$1==chr{print $2}'	$input_genome`;
 echo -e "$chr\t$str\t$chrLen";
 rm -rf	$outDir/$file.HDF5.$chr.$str		$outDir/exons.psite.$chr.$str;
