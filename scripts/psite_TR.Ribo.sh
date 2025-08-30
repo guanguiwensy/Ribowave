@@ -54,8 +54,8 @@ if($10==1){
 	print len"\tc("coor")"		>>	prefix"."$1"."$6;
 }}'	$outDir/$file.bed12;
 ######## reads2psite
-ls $outDir/exons.coor.*		|awk -F '.' '{print $(NF-1)"."$NF}'	>	$outDir/foo;
-ls $outDir/$file.bed12.*	|awk -F '.' '{print $(NF-1)"."$NF}'	>>	$outDir/foo;
+ls $outDir/exons.coor.* | sed 's/.*exons\.coor\.//' > $outDir/foo
+ls $outDir/$file.bed12.* | sed "s/.*$file\.bed12\.//" >> $outDir/foo
 sort $outDir/foo|uniq -c|awk '$1==2{print $2}'				>	$outDir/chrstr;
 
 for i in `cat $outDir/chrstr`;do 
